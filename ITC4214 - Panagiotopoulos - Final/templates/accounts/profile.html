@@ -1,0 +1,20 @@
+{% extends "../base/base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+{% include "../base/nav-main.html" %}
+<div class="container">
+    <section class="jumbotron text-center bg-white">
+        
+        <div class="container">
+            <h1>User Details</h1>
+            <p class="lead text-muted">Username: {{user.username}}</p>
+            <p class="lead text-muted">First Name: {{user.first_name}}</p>
+            <p class="lead text-muted">Last Name: {{user.last_name}}</p>
+            <p class="lead text-muted">Email: {{user.email}}</p>
+            <p class="lead text-muted">Staff: {{user.is_staff}}</p>
+            
+        </div>
+    </section>
+</div>
+{% include "base/footer.html" %}
+{% endblock %}
