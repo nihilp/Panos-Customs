@@ -10,11 +10,15 @@ def home(request):
 
     all_posts = Motorcycles.newmanager.all()
 
-    return render(request, 'blog/index.html', {'motorcycles': all_posts})
+    return render(request, 'blog/index.html', {
+        'motorcycles': all_posts,
+        'category' : Category.objects.all()
+        })
 
 def about(request):
     return render(request, "blog/about.html", {
-        "com" : PanosCustoms.objects.all()
+        'com' : PanosCustoms.objects.all(),
+        'category' : Category.objects.all()
     })  
 
 def post_single(request, motorcycle):
@@ -42,7 +46,15 @@ def post_single(request, motorcycle):
             return HttpResponseRedirect('/' + motorcycle.slug)
     else:
         comment_form = NewCommentForm()
-    return render(request, 'blog/single.html', {'motorcycle': motorcycle, 'comments':  user_comment, 'comments': comments, 'comment_form': comment_form, 'allcomments': allcomments, 'fav': fav})
+    return render(request, 'blog/single.html', {
+        'motorcycle': motorcycle, 
+        'comments':  user_comment, 
+        'comments': comments, 
+        'comment_form': comment_form, 
+        'allcomments': allcomments, 
+        'fav': fav,
+        'category' : Category.objects.all()
+        })
 
 
 class CatListView(ListView):
@@ -52,7 +64,8 @@ class CatListView(ListView):
     def get_queryset(self):
         content = {
             'cat': self.kwargs['category'],
-            'motorcycles': Motorcycles.objects.filter(category__name=self.kwargs['category']).filter(status='published')
+            'motorcycles': Motorcycles.objects.filter(category__name=self.kwargs['category']).filter(status='published'),
+            'category' : Category.objects.all()
         }
         return content
 
@@ -61,6 +74,7 @@ def category_list(request):
     category_list = Category.objects.exclude(name='default')
     context = {
         "category_list": category_list,
+        'category' : Category.objects.all()
     }
     return context
 
@@ -88,4 +102,6 @@ def post_search(request):
     return render(request, 'blog/search.html',
                   {'form': form,
                    'q': q,
-                   'results': results})
+                   'results': results,
+                   'category' : Category.objects.all()
+                   })

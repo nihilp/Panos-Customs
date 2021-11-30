@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
+    'django_extensions',
     'phonenumber_field',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,3 +134,8 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+GRAPH_MODELS = {
+    'all_applications' : True,
+    'group_models' : True
+}

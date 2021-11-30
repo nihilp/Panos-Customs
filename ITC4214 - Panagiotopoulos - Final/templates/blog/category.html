@@ -1,35 +1,37 @@
-    {% extends "../base/base.html" %}
+{% extends "../base/base.html" %}
+{% block title %}
+Category Search
+{% endblock %}
+{% block content %}
+{% include "base/nav-main.html" %}
 
-    {% block title %}
-    Catlist
-    {% endblock %}
-
-    {% block content %}
-    {% include "base/nav-main.html" %}
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 pb-5">
-            <h1> List of {{catlist.cat}} posts</h1>
-          </div>
-          {% for post in catlist.posts %}
-          <div class="col-md-4">
-            <a class="text-dark" href="{{post.get_absolute_url}}">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src="{{post.image.url}}" alt="{{ post.title }}">
-                <div class="card-body">
-                  <h2 style="font-size:18px;font-weight:bold">{{post.title|truncatechars:50}}</h2>
-                  <p class="card-text">{{post.excerpt|truncatechars:50}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">9 mins</small>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          {% endfor %}
-        </div>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 pb-5">
+        <h1> List of {{catlist.cat}} motorcycles</h1>
+        
       </div>
+      {% for moto in catlist.motorcycles %}
+      <div class="col-md-4">
+        <a class="text-dark" href="{{moto.get_absolute_url}}">
+          <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="{{moto.image.url}}" alt="">
+            <div class="card-body">
+              <h2 style="font-size:18px;font-weight:bold">{{moto.name|truncatechars:50}}</h2>
+              <p class="card-text">{{moto.category|truncatechars:50}} style {{moto.name|safe}} {{moto.company|safe}} {{moto.capacity|safe}}cc</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted"></small>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% empty %}
+      <p>We haven't customized any motorcycles of this category yet.</p>
+      {% endfor %}
     </div>
-
-    {% endblock %}
+  </div>
+</div>
+{% include "base/footer.html" %}
+{% endblock %}

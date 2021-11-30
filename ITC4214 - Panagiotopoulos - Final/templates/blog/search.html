@@ -21,10 +21,10 @@
                 <div class="col-md-4">
                     <a class="text-dark" href="{{motorcycle.get_absolute_url}}">
                         <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="{{motorcycle.image.url}}" alt="{{ motorcycle.name }}">
+                            <img class="card-img-top" src="{{motorcycle.image.url}}" alt="">
                             <div class="card-body">
                                 <h2 style="font-size:18px;font-weight:bold">{{motorcycle.name|truncatechars:50}}</h2>
-                                <p class="card-text">{{motorcycle.excerpt|truncatechars:50}}</p>
+                                <p class="card-text">{{motorcycle.category|truncatechars:50}} style {{motorcycle.name|safe}} {{motorcycle.company|safe}} {{motorcycle.capacity|safe}}cc</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-muted"></small>
                                 </div>
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <p><a href="{% url "blog:post_search" %}" class="btn btn-primary" role="button" aria-disabled="true">New
+    <p><a href="{% url 'blog:post_search' %}" class="btn btn-primary" role="button" aria-disabled="true">New
             Search</a>
     </p>
     {% else %}
@@ -49,4 +49,5 @@
     </form>
     {% endif %}
 </div>
+{% include "base/footer.html" %}
 {% endblock %}

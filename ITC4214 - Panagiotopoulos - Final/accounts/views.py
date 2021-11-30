@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 from blog.forms import PostSearchForm
 from .forms import RegistrationForm, UserEditForm, UserProfileForm
 from .tokens import account_activation_token
-from .models import Profile
-from blog.models import Motorcycles
+from .models import *
+from blog.models import Motorcycles, Category
 from django.http import JsonResponse
 
 
@@ -39,9 +39,10 @@ def like(request):
 @ login_required
 def favourite_list(request):
     new = Motorcycles.newmanager.filter(favourites=request.user)
-    return render(request,
-                  'accounts/favourites.html',
-                  {'new': new})
+    return render(request,'accounts/favourites.html',{
+        'new': new,
+        'category' : Category.objects.all()
+            })
 
 
 @ login_required
@@ -60,6 +61,7 @@ def avatar(request):
         avatar = Profile.objects.filter(user=user)
         context = {
             "avatar": avatar,
+            'category' : Category.objects.all()
         }
         return context
     else:
@@ -70,9 +72,10 @@ def avatar(request):
 
 @login_required
 def profile(request):
-    return render(request,
-                  'accounts/profile.html',
-                  {'section': 'profile'})
+    return render(request,'accounts/profile.html',{
+                  'section': 'profile',
+                  'category' : Category.objects.all()
+                  })
 
 
 @login_required
@@ -91,9 +94,11 @@ def edit(request):
         user_form = UserEditForm(instance=request.user)
         profile_form = UserProfileForm(instance=request.user.profile)
 
-    return render(request,
-                  'accounts/update.html',
-                  {'user_form': user_form, 'profile_form': profile_form})
+    return render(request,'accounts/update.html',{
+        'user_form': user_form, 
+        'profile_form': profile_form,
+        'category' : Category.objects.all()
+        })
 
 
 @login_required
@@ -131,7 +136,9 @@ def post_search(request):
     return render(request, 'blog/search.html',
                   {'form': form,
                    'q': q,
-                   'results': results})
+                   'results': results,
+                   'category' : Category.objects.all()
+                   })
 
 
 def accounts_register(request):
