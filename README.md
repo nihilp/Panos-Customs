@@ -9,7 +9,7 @@ It is all used only for demonstration purposes and should not be used for any co
 
 # Demonstration video
 
-https://youtu.be/dwDhizShWIY
+https://youtu.be/dwDhizShWIY (after the making of the demonstration video, I added 24 more motorcycles, in order for the website to look and feel more complete)
 
 # Tutorials 
 
